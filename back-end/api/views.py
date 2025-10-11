@@ -5,7 +5,7 @@ from .models import Cliente
 from .serializers import ClienteSerializer
 
 # Create your views here.
-@api_view['POST']
+@api_view(['POST'])
 def cliente_create(request):
   if request.method == "POST":
     serializer = ClienteSerializer(data=request.data) 
