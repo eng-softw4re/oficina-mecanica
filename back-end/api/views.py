@@ -22,4 +22,22 @@ def get_cliente(request, pk):
   if request.method == 'GET':
     serializer = ClienteSerializer(cliente)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def update_cliente(request):
+  cpf = request.data.get("cpf")
+
+  if not cpf:
+    return Response(
+      { "detail": "O campo CPF é obrigatório para atualizar o cliente." },
+      status=status.HTTP_400_BAD_REQUEST
+    )
   
+  cliente = get_object_or_404(Cliente, cpf=cpf)
+  print(cliente)
+
+  serializer = ClienteSerializer(cliente, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
+  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
