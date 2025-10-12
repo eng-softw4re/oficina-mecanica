@@ -41,3 +41,20 @@ def update_cliente(request):
     serializer.save()
     return Response(serializer.data)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_cliente(request):
+  cpf = request.data.get("cpf")
+  print("cpf:", cpf)
+
+  if not cpf:
+    return Response(
+      { "details": "Informe um CPF válido para deletar o cliente." },
+      status=status.HTTP_400_BAD_REQUEST
+    )
+  
+  cliente = get_object_or_404(Cliente, cpf=cpf)
+  print("aqui", cliente)
+  cliente.delete()
+
+  return Response(status=status.HTTP_204_NO_CONTENT)
