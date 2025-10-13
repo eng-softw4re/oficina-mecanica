@@ -18,7 +18,6 @@ class Procedimento(models.Model):
       help_text="Tempo estimado para o procedimento. Ex: '1:30:00' para 1h 30min."
   )
   descricao = models.TextField(blank=True, null=True)
-  insumo = models.CharField(max_length=255)
 
   def __str__(self):
       return self.nome
