@@ -85,3 +85,11 @@ def update_procedimento(request, pk):
     serializer.save()
     return Response(serializer.data)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['DELETE'])
+def delete_procedimento(request, pk):
+  procedimento = get_object_or_404(Procedimento, pk=pk)
+  procedimento.delete()
+  
+  return Response(status=status.HTTP_204_NO_CONTENT)
