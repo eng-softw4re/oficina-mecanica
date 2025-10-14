@@ -75,3 +75,13 @@ def get_procedimento(request, pk):
   if request.method == 'GET':
     serializer = ClienteSerializer(proced)
     return Response(serializer.data)
+  
+@api_view(['PUT'])
+def update_procedimento(request, pk):
+  proced = get_object_or_404(Procedimento, pk=pk)
+
+  serializer = ProcedimentoSerializer(proced, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
+  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
