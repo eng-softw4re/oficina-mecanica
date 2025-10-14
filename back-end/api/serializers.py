@@ -9,4 +9,4 @@ class ClienteSerializer(serializers.ModelSerializer):
 class ProcedimentoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Procedimento
-    fields = ["id", "nome", "valor", "tempoEst", "descricao"]
+    fields = ["id", "nome", "valor", "tempo_estimado", "descricao"]
