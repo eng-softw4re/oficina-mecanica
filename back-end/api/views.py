@@ -14,7 +14,7 @@ def cliente_create(request):
     if serializer.is_valid(): # valida os dados
       serializer.save() # salva os dados no banco
       return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.erros, status=status.HTTP_400_BADREQUEST)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_cliente(request, pk):
@@ -67,7 +67,7 @@ def veiculo_create(request):
     if serializer.is_valid():
       serializer.save()
       return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.erros, status=status.HTTP_400_BADREQUEST)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
   
 @api_view(['GET'])
 def get_veiculo(request, pk):
@@ -103,7 +103,7 @@ def create_procedimento(request):
     if serializer.is_valid(): # valida os dados
       serializer.save() # salva os dados no banco
       return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.erros, status=status.HTTP_400_BADREQUEST)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 def get_procedimento(request, pk):
