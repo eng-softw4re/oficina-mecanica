@@ -67,3 +67,11 @@ def procedimento_create(request):
       serializer.save() # salva os dados no banco
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.erros, status=status.HTTP_400_BADREQUEST)
+
+@api_view(['GET'])
+def get_procedimento(request, pk):
+  proced = get_object_or_404(Procedimento, pk=pk)
+
+  if request.method == 'GET':
+    serializer = ClienteSerializer(proced)
+    return Response(serializer.data)
