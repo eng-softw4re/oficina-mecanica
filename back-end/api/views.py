@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Cliente
+from .models import Cliente, Veiculo
 from .serializers import ClienteSerializer, VeiculoSerializer
 from django.shortcuts import get_object_or_404
 
@@ -68,3 +68,11 @@ def veiculo_create(request):
       serializer.save()
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.erros, status=status.HTTP_400_BADREQUEST)
+  
+@api_view(['GET'])
+def get_veiculo(request, pk):
+  veiculo = get_object_or_404(Veiculo, pk=pk)
+
+  if request.method == 'GET':
+    serializer = VeiculoSerializer(veiculo)
+    return Response(serializer.data)
