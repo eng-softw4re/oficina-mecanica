@@ -2,7 +2,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Cliente
-from .serializers import ClienteSerializer
+from .serializers import ClienteSerializer, VeiculoSerializer
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -58,3 +58,13 @@ def delete_cliente(request):
   cliente.delete()
 
   return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['POST'])
+def veiculo_create(request):
+  if request.method == 'POST':
+    serializer = VeiculoSerializer(data=request.data)
+    if serializer.is_valid():
+      serializer.save()
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.erros, status=status.HTTP_400_BADREQUEST)
