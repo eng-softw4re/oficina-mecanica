@@ -6,6 +6,7 @@ from .serializers import ClienteSerializer, VeiculoSerializer, ProcedimentoSeria
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
+# CLIENTES
 @api_view(['POST'])
 def cliente_create(request):  
   if request.method == "POST":
@@ -58,7 +59,7 @@ def delete_cliente(request):
   cliente.delete()
 
   return Response(status=status.HTTP_204_NO_CONTENT)
-
+# VEÍCULOS
 @api_view(['POST'])
 def veiculo_create(request):
   if request.method == 'POST':
@@ -76,6 +77,25 @@ def get_veiculo(request, pk):
     serializer = VeiculoSerializer(veiculo)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+def update_veiculo(request):
+  placa = request.data.get("placa")
+
+  if not placa:
+    return Response(
+      { "details": "Informe uma placa válida para atualizar o veículo." },
+      status=status.HTTP_400_BAD_REQUEST
+    )
+  
+  veiculo = get_object_or_404(Veiculo, placa=placa)
+
+  serializer = VeiculoSerializer(veiculo, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
+  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# PROCEDIMENTOS
 @api_view(['POST'])
 def create_procedimento(request):  
   if request.method == "POST":
