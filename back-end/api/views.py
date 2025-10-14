@@ -95,6 +95,21 @@ def update_veiculo(request):
     return Response(serializer.data)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['DELETE'])
+def delete_veiculo(request):
+  placa = request.data.get("placa")
+
+  if not placa:
+    Response(
+      { "detail": "Informe uma placa de veícula válida."},
+      status=status.HTTP_400_BAD_REQUEST
+    )
+
+  veiculo = get_object_or_404(Veiculo, placa=placa)
+  veiculo.delete()
+  
+  return Response(status=status.HTTP_204_NO_CONTENT)
+
 # PROCEDIMENTOS
 @api_view(['POST'])
 def create_procedimento(request):  
