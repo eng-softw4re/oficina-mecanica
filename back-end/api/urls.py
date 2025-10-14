@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     cliente_create, get_cliente, update_cliente, delete_cliente,
-    veiculo_create, get_veiculo,
+    veiculo_create, get_veiculo, update_veiculo,
     create_procedimento, get_procedimento, update_procedimento, delete_procedimento
 )
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
 
     path("veiculos/", veiculo_create, name="veiculo-create"),
     path("veiculos/<int:pk>", get_veiculo, name="get-veiculo"),
+    path("veiculos/update/", update_veiculo, name="update-veiculo"),
 
     path("procedimentos/", create_procedimento, name="create-procedimento"),
     path("procedimentos/<int:pk>", get_procedimento, name="get-procedimento"),
