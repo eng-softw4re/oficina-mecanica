@@ -15,7 +15,7 @@ urlpatterns = [
     path("clientes/update/", update_cliente, name="put-cliente"),
     path("clientes/delete/", delete_cliente, name="delete-cliente"),
     path("procedimentos/", create_procedimento, name="create-procedimento"),
-    path("procedimento/<int:pk>", get_procedimento, name="get-procedimento"),
-    path("procedimento/<int:pk>", update_procedimento, name="update-procedimento"),
-    path("procedimento/<int:pk>", delete_procedimento, name="delete-procedimento"),
+    path("procedimentos/<int:pk>", get_procedimento, name="get-procedimento"),
+    path("procedimentos/update/<int:pk>", update_procedimento, name="update-procedimento"),
+    path("procedimentos/delete/<int:pk>", delete_procedimento, name="delete-procedimento"),
 ]

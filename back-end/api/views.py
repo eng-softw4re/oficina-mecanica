@@ -73,7 +73,7 @@ def get_procedimento(request, pk):
   proced = get_object_or_404(Procedimento, pk=pk)
 
   if request.method == 'GET':
-    serializer = ClienteSerializer(proced)
+    serializer = ProcedimentoSerializer(proced)
     return Response(serializer.data)
   
 @api_view(['PUT'])
