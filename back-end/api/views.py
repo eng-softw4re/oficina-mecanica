@@ -60,7 +60,7 @@ def delete_cliente(request):
   return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
-def procedimento_create(request):  
+def create_procedimento(request):  
   if request.method == "POST":
     serializer = ProcedimentoSerializer(data=request.data) 
     if serializer.is_valid(): # valida os dados
@@ -85,7 +85,6 @@ def update_procedimento(request, pk):
     serializer.save()
     return Response(serializer.data)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 @api_view(['DELETE'])
 def delete_procedimento(request, pk):
