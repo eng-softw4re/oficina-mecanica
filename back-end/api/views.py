@@ -171,3 +171,10 @@ def update_ordem(request, pk):
     serializer.save()
     return Response(serializer.data)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_ordem(request, pk):
+  ordem = get_object_or_404(OrdemServico, pk=pk)
+  ordem.delete()
+  
+  return Response(status=status.HTTP_204_NO_CONTENT)
