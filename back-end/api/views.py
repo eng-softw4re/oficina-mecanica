@@ -161,3 +161,13 @@ def get_ordem(request, pk):
   if request.method == 'GET':
     serializer = OrdemServicoSerializer(ordem)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def update_ordem(request, pk):
+  ordem = get_object_or_404(OrdemServico, pk=pk)
+
+  serializer = OrdemServicoSerializer(ordem, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
+  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
