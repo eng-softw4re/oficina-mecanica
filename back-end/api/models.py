@@ -33,3 +33,11 @@ class Procedimento(models.Model):
 
   def __str__(self):
       return self.nome
+
+class OrdemServico(models.Model):
+  cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE, related_name='ordem')
+  veiculo = models.ForeignKey("Veiculo", on_delete=models.CASCADE, related_name='ordem')
+  data = models.DateTimeField(auto_now_add=True)
+  #insumos = models.ManyToManyField(Insumo)
+  def __str__(self):
+      return self.nome
