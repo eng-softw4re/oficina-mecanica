@@ -4,6 +4,7 @@ from .views import (
     veiculo_create, get_veiculo, update_veiculo, delete_veiculo,
     create_procedimento, get_procedimento, update_procedimento, delete_procedimento,
     create_ordem, get_ordem, update_ordem, delete_ordem,
+    create_insumo, get_insumo, update_insumo, delete_insumo,
 )
 urlpatterns = [
     path("clientes/", cliente_create, name="cliente-create"),
@@ -25,4 +26,9 @@ urlpatterns = [
     path("ordemServicos/<int:pk>", get_ordem, name="get-ordem"),
     path("ordemServicos/update/<int:pk>", update_ordem, name="update-ordem"),
     path("ordemServicos/delete/<int:pk>", delete_ordem, name="delete-ordem"),
+
+    path("insumos/", create_insumo, name="create-insumo"),
+    path("insumos/<int:pk>", get_insumo, name="get-insumo"),
+    path("insumos/update/<int:pk>", update_insumo, name="update-insumo"),
+    path("insumos/delete/<int:pk>", delete_insumo, name="delete-insumo"),
 ]
