@@ -146,40 +146,6 @@ def delete_procedimento(request, pk):
   return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
-def create_ordem(request):  
-  if request.method == "POST":
-    serializer = OrdemServicoSerializer(data=request.data) 
-    if serializer.is_valid(): # valida os dados
-      serializer.save() # salva os dados no banco
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-def get_ordem(request, pk):
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-
-  if request.method == 'GET':
-    serializer = OrdemServicoSerializer(ordem)
-    return Response(serializer.data)
-
-@api_view(['PUT'])
-def update_ordem(request, pk):
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-
-  serializer = OrdemServicoSerializer(ordem, data=request.data)
-  if serializer.is_valid():
-    serializer.save()
-    return Response(serializer.data)
-  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-def delete_ordem(request, pk):
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-  ordem.delete()
-  
-  return Response(status=status.HTTP_204_NO_CONTENT)
-
-@api_view(['POST'])
 def create_insumo(request):  
   if request.method == "POST":
     serializer = InsumoSerializer(data=request.data) 
@@ -209,6 +175,40 @@ def update_insumo(request, pk):
 @api_view(['DELETE'])
 def delete_insumo(request, pk):
   ordem = get_object_or_404(Insumo, pk=pk)
+  ordem.delete()
+  
+  return Response(status=status.HTTP_204_NO_CONTENT)
+
+@api_view(['POST'])
+def create_ordem(request):  
+  if request.method == "POST":
+    serializer = OrdemServicoSerializer(data=request.data) 
+    if serializer.is_valid(): # valida os dados
+      serializer.save() # salva os dados no banco
+      return Response(serializer.data, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_ordem(request, pk):
+  ordem = get_object_or_404(OrdemServico, pk=pk)
+
+  if request.method == 'GET':
+    serializer = OrdemServicoSerializer(ordem)
+    return Response(serializer.data)
+
+@api_view(['PUT'])
+def update_ordem(request, pk):
+  ordem = get_object_or_404(OrdemServico, pk=pk)
+
+  serializer = OrdemServicoSerializer(ordem, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
+  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_ordem(request, pk):
+  ordem = get_object_or_404(OrdemServico, pk=pk)
   ordem.delete()
   
   return Response(status=status.HTTP_204_NO_CONTENT)

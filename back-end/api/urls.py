@@ -23,15 +23,15 @@ urlpatterns = [
     path("procedimentos/update/<int:pk>", update_procedimento, name="update-procedimento"),
     path("procedimentos/delete/<int:pk>", delete_procedimento, name="delete-procedimento"),
 
-    path("ordemServicos/", create_ordem, name="create-ordem"),
-    path("ordemServicos/<int:pk>", get_ordem, name="get-ordem"),
-    path("ordemServicos/update/<int:pk>", update_ordem, name="update-ordem"),
-    path("ordemServicos/delete/<int:pk>", delete_ordem, name="delete-ordem"),
-
     path("insumos/", create_insumo, name="create-insumo"),
     path("insumos/<int:pk>", get_insumo, name="get-insumo"),
     path("insumos/update/<int:pk>", update_insumo, name="update-insumo"),
     path("insumos/delete/<int:pk>", delete_insumo, name="delete-insumo"),
+    
+    path("ordemServicos/", create_ordem, name="create-ordem"),
+    path("ordemServicos/<int:pk>", get_ordem, name="get-ordem"),
+    path("ordemServicos/update/<int:pk>", update_ordem, name="update-ordem"),
+    path("ordemServicos/delete/<int:pk>", delete_ordem, name="delete-ordem"),
 
     path("insumosOrdem/", create_insumo_os, name="create-insumoOrdem,"),
     path("insumosOrdem/<int:pk>", get_insumo_os, name="get-insumoOrdem"),
