@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+from decimal import Decimal
 
 # Create your models here.
 class Cliente(models.Model):
@@ -32,4 +34,54 @@ class Procedimento(models.Model):
   descricao = models.TextField(blank=True, null=True)
 
   def __str__(self):
-      return self.nome
+    return self.nome
+  
+class Insumo(models.Model):
+  nome = models.CharField(max_length=255)
+  valor = models.DecimalField(max_digits=10, decimal_places=2)
+  descricao = models.TextField(blank=True, null=True)
+
+  def __str__(self):
+    return self.nome
+
+class OrdemServico(models.Model):
+  cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE, related_name='ordens_cliente')
+  veiculo = models.ForeignKey("Veiculo", on_delete=models.CASCADE, related_name='ordens_servico')
+  data = models.DateTimeField(auto_now_add=True)
+  insumos = models.ManyToManyField('Insumo', through='InsumoOrdemServico', related_name='ordens_de_servico')
+  procedimentos = models.ManyToManyField(Procedimento)
+
+  def __str__(self):
+    return f"OS #{self.id} - {self.cliente.nome}"
+  
+  def calcular_valor_total(self):
+    # 1. Calcular o total dos procedimentos
+    total_procedimentos = self.procedimentos.aggregate(
+      total=Sum('valor')
+    )['total'] or Decimal('0.00')
+
+    # 2. Calcular o total dos insumos
+    total_insumos = self.insumoordemservico_set.aggregate(
+      total=Sum(
+        ExpressionWrapper(
+          F('quantidade') * F('insumo__valor'),
+          output_field=DecimalField()
+        )
+      )
+    )['total'] or Decimal('0.00')
+
+    # 3. Retornar a soma final
+    valor_total = total_procedimentos + total_insumos
+    return valor_total
+
+class InsumoOrdemServico(models.Model):
+    ordem_servico = models.ForeignKey('OrdemServico', on_delete=models.CASCADE)
+    insumo = models.ForeignKey('Insumo', on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField(default=1)
+
+    class Meta:
+      # Garante que não se pode adicionar o mesmo insumo duas vezes na mesma OS
+      unique_together = ('ordem_servico', 'insumo')
+
+    def __str__(self):
+      return f"{self.quantidade} x {self.insumo.nome} na OS #{self.ordem_servico.id}"

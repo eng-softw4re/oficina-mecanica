@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cliente, Veiculo, Procedimento
+from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico
 
 class ClienteSerializer(serializers.ModelSerializer):
   class Meta:
@@ -16,3 +16,17 @@ class ProcedimentoSerializer(serializers.ModelSerializer):
     model = Procedimento
     fields = ["id", "nome", "valor", "tempo_estimado", "descricao"]
 
+class InsumoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Insumo
+    fields = ["id", "nome", "valor", "descricao"]
+
+class OrdemServicoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = OrdemServico
+    fields = ["id", "cliente", "veiculo", "data", "insumos", "procedimentos"]
+
+class InsumoOrdemSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = InsumoOrdemServico
+    fields = ["id", "ordem_servico", "insumo", "quantidade"]
