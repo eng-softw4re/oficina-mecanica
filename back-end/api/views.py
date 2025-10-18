@@ -187,3 +187,11 @@ def create_insumo(request):
       serializer.save() # salva os dados no banco
       return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def get_ordem(request, pk):
+  insumo = get_object_or_404(Insumo, pk=pk)
+
+  if request.method == 'GET':
+    serializer = InsumoSerializer(insumo)
+    return Response(serializer.data)
