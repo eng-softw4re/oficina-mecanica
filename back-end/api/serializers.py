@@ -24,7 +24,7 @@ class InsumoSerializer(serializers.ModelSerializer):
 class OrdemServicoSerializer(serializers.ModelSerializer):
   class Meta:
     model = OrdemServico
-    fields = ["id", "cliente", "veiculo", "data", "insumos"]
+    fields = ["id", "cliente", "veiculo", "data", "insumos", "procedimentos"]
 
 class InsumoOrdemSerializer(serializers.ModelSerializer):
   class Meta:
