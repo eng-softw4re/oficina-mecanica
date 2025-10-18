@@ -213,6 +213,21 @@ def delete_ordem(request, pk):
   
   return Response(status=status.HTTP_204_NO_CONTENT)
 
+@api_view(['GET'])
+def get_ordem_total(request, pk):
+  """
+  View para calcular e retornar o valor total de uma Ordem de Serviço.
+  """
+  ordem = get_object_or_404(OrdemServico, pk=pk)
+  try:
+    total = ordem.calcular_valor_total()
+    return Response({'valor_total': total}, status=status.HTTP_200_OK)
+  except Exception as e:
+    return Response(
+      {'erro': f'Erro ao calcular o total: {str(e)}'}, 
+      status=status.HTTP_500_INTERNAL_SERVER_ERROR
+    )
+
 @api_view(['POST'])
 def create_insumo_os(request):  
     """
