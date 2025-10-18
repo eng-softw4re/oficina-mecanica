@@ -214,7 +214,7 @@ def delete_insumo(request, pk):
   return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
-def add_insumo_os(request):  
+def create_insumo_os(request):  
     """
     Adiciona um insumo e sua quantidade a uma Ordem de Serviço.
     """

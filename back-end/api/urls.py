@@ -5,6 +5,7 @@ from .views import (
     create_procedimento, get_procedimento, update_procedimento, delete_procedimento,
     create_ordem, get_ordem, update_ordem, delete_ordem,
     create_insumo, get_insumo, update_insumo, delete_insumo,
+    create_insumo_os, get_insumo_os, update_insumo_os, delete_insumo_os,
 )
 urlpatterns = [
     path("clientes/", cliente_create, name="cliente-create"),
@@ -31,4 +32,9 @@ urlpatterns = [
     path("insumos/<int:pk>", get_insumo, name="get-insumo"),
     path("insumos/update/<int:pk>", update_insumo, name="update-insumo"),
     path("insumos/delete/<int:pk>", delete_insumo, name="delete-insumo"),
+
+    path("insumosOrdem/", create_insumo_os, name="create-insumoOrdem,"),
+    path("insumosOrdem/<int:pk>", get_insumo_os, name="get-insumoOrdem"),
+    path("insumosOrdem/update/<int:pk>", update_insumo_os, name="update-insumoOrdem"),
+    path("insumosOrdem/delete/<int:pk>", delete_insumo_os, name="delete-insumoOrdem"),
 ]
