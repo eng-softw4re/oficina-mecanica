@@ -195,3 +195,13 @@ def get_ordem(request, pk):
   if request.method == 'GET':
     serializer = InsumoSerializer(insumo)
     return Response(serializer.data)
+  
+@api_view(['PUT'])
+def update_ordem(request, pk):
+  insumo = get_object_or_404(Insumo, pk=pk)
+
+  serializer = InsumoSerializer(insumo, data=request.data)
+  if serializer.is_valid():
+    serializer.save()
+    return Response(serializer.data)
+  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
