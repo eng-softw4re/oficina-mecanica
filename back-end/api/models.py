@@ -46,7 +46,8 @@ class OrdemServico(models.Model):
   cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE, related_name='ordens_cliente')
   veiculo = models.ForeignKey("Veiculo", on_delete=models.CASCADE, related_name='ordens_servico')
   data = models.DateTimeField(auto_now_add=True)
-  #insumos = models.ManyToManyField(Insumo)
+  insumos = models.ManyToManyField('Insumo', through='InsumoOrdemServico', related_name='ordens_de_servico')
+  #procedimentos = models.ManyToManyField(Insumo)
   def __str__(self):
     return f"OS #{self.id} - {self.cliente.nome}"
 
