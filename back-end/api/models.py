@@ -49,3 +49,15 @@ class OrdemServico(models.Model):
   #insumos = models.ManyToManyField(Insumo)
   def __str__(self):
     return f"OS #{self.id} - {self.cliente.nome}"
+
+class InsumoOrdemServico(models.Model):
+    ordem_servico = models.ForeignKey('OrdemServico', on_delete=models.CASCADE)
+    insumo = models.ForeignKey('Insumo', on_delete=models.CASCADE)
+    quantidade = models.PositiveIntegerField(default=1)
+
+    class Meta:
+      # Garante que não se pode adicionar o mesmo insumo duas vezes na mesma OS
+      unique_together = ('ordem_servico', 'insumo')
+
+    def __str__(self):
+      return f"{self.quantidade} x {self.insumo.nome} na OS #{self.ordem_servico.id}"
