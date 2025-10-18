@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Sum, F, ExpressionWrapper, DecimalField
+from decimal import Decimal
 
 # Create your models here.
 class Cliente(models.Model):
@@ -48,9 +50,29 @@ class OrdemServico(models.Model):
   data = models.DateTimeField(auto_now_add=True)
   insumos = models.ManyToManyField('Insumo', through='InsumoOrdemServico', related_name='ordens_de_servico')
   procedimentos = models.ManyToManyField(Procedimento)
-  
+
   def __str__(self):
     return f"OS #{self.id} - {self.cliente.nome}"
+  
+  def calcular_valor_total(self):
+    # 1. Calcular o total dos procedimentos
+    total_procedimentos = self.procedimentos.aggregate(
+      total=Sum('valor')
+    )['total'] or Decimal('0.00')
+
+    # 2. Calcular o total dos insumos
+    total_insumos = self.insumoordemservico_set.aggregate(
+      total=Sum(
+        ExpressionWrapper(
+          F('quantidade') * F('insumo__valor'),
+          output_field=DecimalField()
+        )
+      )
+    )['total'] or Decimal('0.00')
+
+    # 3. Retornar a soma final
+    valor_total = total_procedimentos + total_insumos
+    return valor_total
 
 class InsumoOrdemServico(models.Model):
     ordem_servico = models.ForeignKey('OrdemServico', on_delete=models.CASCADE)
