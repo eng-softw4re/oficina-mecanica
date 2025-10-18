@@ -189,7 +189,7 @@ def create_insumo(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-def get_ordem(request, pk):
+def get_insumo(request, pk):
   insumo = get_object_or_404(Insumo, pk=pk)
 
   if request.method == 'GET':
@@ -197,7 +197,7 @@ def get_ordem(request, pk):
     return Response(serializer.data)
   
 @api_view(['PUT'])
-def update_ordem(request, pk):
+def update_insumo(request, pk):
   insumo = get_object_or_404(Insumo, pk=pk)
 
   serializer = InsumoSerializer(insumo, data=request.data)
@@ -205,3 +205,10 @@ def update_ordem(request, pk):
     serializer.save()
     return Response(serializer.data)
   return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['DELETE'])
+def delete_insumo(request, pk):
+  ordem = get_object_or_404(Insumo, pk=pk)
+  ordem.delete()
+  
+  return Response(status=status.HTTP_204_NO_CONTENT)
