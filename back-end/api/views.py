@@ -1,45 +1,10 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico
-from .serializers import ClienteSerializer, VeiculoSerializer, ProcedimentoSerializer, OrdemServicoSerializer, InsumoSerializer, InsumoOrdemSerializer
+from .models import OrdemServico, Insumo, InsumoOrdemServico
+from .serializers import OrdemServicoSerializer, InsumoSerializer, InsumoOrdemSerializer
 from django.shortcuts import get_object_or_404
 
-
-# PROCEDIMENTOS
-@api_view(['POST'])
-def create_procedimento(request):  
-  if request.method == "POST":
-    serializer = ProcedimentoSerializer(data=request.data) 
-    if serializer.is_valid(): # valida os dados
-      serializer.save() # salva os dados no banco
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-def get_procedimento(request, pk):
-  proced = get_object_or_404(Procedimento, pk=pk)
-
-  if request.method == 'GET':
-    serializer = ProcedimentoSerializer(proced)
-    return Response(serializer.data)
-  
-@api_view(['PUT'])
-def update_procedimento(request, pk):
-  proced = get_object_or_404(Procedimento, pk=pk)
-
-  serializer = ProcedimentoSerializer(proced, data=request.data)
-  if serializer.is_valid():
-    serializer.save()
-    return Response(serializer.data)
-  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-def delete_procedimento(request, pk):
-  procedimento = get_object_or_404(Procedimento, pk=pk)
-  procedimento.delete()
-  
-  return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
 def create_insumo(request):  
