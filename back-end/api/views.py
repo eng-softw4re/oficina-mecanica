@@ -41,55 +41,6 @@ def delete_insumo(request, pk):
   return Response(status=status.HTTP_204_NO_CONTENT)
 
 @api_view(['POST'])
-def create_ordem(request):  
-  if request.method == "POST":
-    serializer = OrdemServicoSerializer(data=request.data) 
-    if serializer.is_valid(): # valida os dados
-      serializer.save() # salva os dados no banco
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-def get_ordem(request, pk):
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-
-  if request.method == 'GET':
-    serializer = OrdemServicoSerializer(ordem)
-    return Response(serializer.data)
-
-@api_view(['PUT'])
-def update_ordem(request, pk):
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-
-  serializer = OrdemServicoSerializer(ordem, data=request.data)
-  if serializer.is_valid():
-    serializer.save()
-    return Response(serializer.data)
-  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-def delete_ordem(request, pk):
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-  ordem.delete()
-  
-  return Response(status=status.HTTP_204_NO_CONTENT)
-
-@api_view(['GET'])
-def get_ordem_total(request, pk):
-  """
-  View para calcular e retornar o valor total de uma Ordem de Serviço.
-  """
-  ordem = get_object_or_404(OrdemServico, pk=pk)
-  try:
-    total = ordem.calcular_valor_total()
-    return Response({'valor_total': total}, status=status.HTTP_200_OK)
-  except Exception as e:
-    return Response(
-      {'erro': f'Erro ao calcular o total: {str(e)}'}, 
-      status=status.HTTP_500_INTERNAL_SERVER_ERROR
-    )
-
-@api_view(['POST'])
 def create_insumo_os(request):  
     """
     Adiciona um insumo e sua quantidade a uma Ordem de Serviço.
