@@ -7,40 +7,6 @@ from django.shortcuts import get_object_or_404
 
 
 @api_view(['POST'])
-def create_insumo(request):  
-  if request.method == "POST":
-    serializer = InsumoSerializer(data=request.data) 
-    if serializer.is_valid(): # valida os dados
-      serializer.save() # salva os dados no banco
-      return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['GET'])
-def get_insumo(request, pk):
-  insumo = get_object_or_404(Insumo, pk=pk)
-
-  if request.method == 'GET':
-    serializer = InsumoSerializer(insumo)
-    return Response(serializer.data)
-  
-@api_view(['PUT'])
-def update_insumo(request, pk):
-  insumo = get_object_or_404(Insumo, pk=pk)
-
-  serializer = InsumoSerializer(insumo, data=request.data)
-  if serializer.is_valid():
-    serializer.save()
-    return Response(serializer.data)
-  return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE'])
-def delete_insumo(request, pk):
-  ordem = get_object_or_404(Insumo, pk=pk)
-  ordem.delete()
-  
-  return Response(status=status.HTTP_204_NO_CONTENT)
-
-@api_view(['POST'])
 def create_insumo_os(request):  
     """
     Adiciona um insumo e sua quantidade a uma Ordem de Serviço.
