@@ -8,23 +8,11 @@ from ..models import Cobranca
 from ..serializers import CobrancaSerializer
 
 class CobrancaViewSet(viewsets.ModelViewSet):
-  """
-  ViewSet para o modelo Cobranca.
-  Fornece 'list' e 'create' (pela herança de ModelViewSet).
-  E um 'delete_by_id' personalizado.
-  """
   queryset = Cobranca.objects.all()
   serializer_class = CobrancaSerializer
 
-  # O método @action(detail=False, methods=['put']...) foi omitido,
-  # conforme solicitado.
-
   @action(detail=False, methods=['delete'], url_path='delete')
   def delete_by_id(self, request):
-    """
-    Deleta uma cobrança esperando o 'id' no corpo (body) da requisição.
-    """
-    # Pega o 'id' do corpo da requisição
     id = request.data.get("id")
 
     if not id:
