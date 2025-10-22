@@ -4,3 +4,4 @@ from .procedimento_view import ProcedimentoViewSet
 from .ordem_de_servico_view import OrdemServicoViewSet
 from .insumo_view import InsumoViewSet
 from .insumo_ordem_servico_view import InsumoOrdemServicoViewSet
+from .insumo_cobranca_view import CobrancaViewSet

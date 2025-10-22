@@ -31,7 +31,7 @@ class InsumoOrdemSerializer(serializers.ModelSerializer):
     model = InsumoOrdemServico
     fields = ["id", "ordem_servico", "insumo", "quantidade"]
 
-class CobrançaSerializer(serializers.ModelSerializer):
+class CobrancaSerializer(serializers.ModelSerializer):
   class Meta:
     model = Cobranca
     fields = ["id", "ordem_servico", "valor_total", "data_emissao"]
