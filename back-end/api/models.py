@@ -75,13 +75,33 @@ class OrdemServico(models.Model):
     return valor_total
 
 class InsumoOrdemServico(models.Model):
-    ordem_servico = models.ForeignKey('OrdemServico', on_delete=models.CASCADE)
-    insumo = models.ForeignKey('Insumo', on_delete=models.CASCADE)
-    quantidade = models.PositiveIntegerField(default=1)
+  ordem_servico = models.ForeignKey('OrdemServico', on_delete=models.CASCADE)
+  insumo = models.ForeignKey('Insumo', on_delete=models.CASCADE)
+  quantidade = models.PositiveIntegerField(default=1)
 
-    class Meta:
-      # Garante que não se pode adicionar o mesmo insumo duas vezes na mesma OS
-      unique_together = ('ordem_servico', 'insumo')
+  class Meta:
+    # Garante que não se pode adicionar o mesmo insumo duas vezes na mesma OS
+    unique_together = ('ordem_servico', 'insumo')
 
-    def __str__(self):
-      return f"{self.quantidade} x {self.insumo.nome} na OS #{self.ordem_servico.id}"
+  def __str__(self):
+    return f"{self.quantidade} x {self.insumo.nome} na OS #{self.ordem_servico.id}"
+
+class Cobranca(models.Model):
+  ordem_servico = models.ForeignKey('OrdemServico', on_delete=models.CASCADE)
+  valor_total = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+  data_emissao = models.DateField(auto_now_add=True)
+
+  def save(self, *args, **kwargs):
+    if self.valor_total is None:
+      self.valor_total = self.ordem_servico.calcular_valor_total()
+    super().save(*args, **kwargs)
+
+  def __str__(self):
+    valor_str = f"R$ {self.valor_total}" if self.valor_total is not None else "Valor Pendente"
+    
+    try:
+      os_id = self.ordem_servico.id
+    except AttributeError:
+      os_id = "Desconhecida"
+
+    return f"Cobrança #{self.id} | OS #{os_id} | {valor_str}"
