@@ -40,9 +40,20 @@ INSTALLED_APPS = [
 
     "rest_framework",
     "corsheaders",
+    "rest_framework.authtoken",
 
     "api",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication', # Autenticação para o /admin/
+        'rest_framework.authentication.TokenAuthentication', # Autenticação que o React usará
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated', # Ninguém acessa nada sem estar logado
+    ],
+}
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
