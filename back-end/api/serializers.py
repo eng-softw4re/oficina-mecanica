@@ -1,11 +1,41 @@
 from rest_framework import serializers
-from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico, Cobranca
+from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico, Cobranca, Endereco
+
+class EnderecoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Endereco
+    fields = ["id", "rua", "bairro", "cidade", "numero"]
 
 class ClienteSerializer(serializers.ModelSerializer):
+  endereco = EnderecoSerializer()
+
   class Meta:
     model = Cliente
     fields = ["id", "nome", "cpf", "telefone", "endereco", "data_nascimento"]
-  
+
+  def create(self, validated_data):
+    endereco_data = validated_data.pop('endereco')
+    endereco_obj = Endereco.objects.create(**endereco_data)
+    cliente_obj = Cliente.objects.create(endereco=endereco_obj, **validated_data)
+
+    return cliente_obj
+
+  def update(self, instance, validated_data):
+    endereco_data = validated_data.pop('endereco', None)
+    instace = super().update(instance, validated_data)
+
+    if endereco_data:
+      if instace.endereco:
+        endereco_serializer = EnderecoSerializer(instace.endereco, data=endereco_data, partial=True)
+        if endereco_serializer.is_valid():
+          endereco_serializer.save()
+      else:
+        new_endereco = Endereco.objects.create(**endereco_data)
+        instance.endereco = new_endereco
+        instance.save()
+    
+    return instance
+
 class VeiculoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Veiculo
