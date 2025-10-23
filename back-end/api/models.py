@@ -3,12 +3,27 @@ from django.db.models import Sum, F, ExpressionWrapper, DecimalField
 from decimal import Decimal
 
 # Create your models here.
+class Endereco(models.Model):
+  rua = models.CharField(max_length=255)
+  numero = models.CharField(max_length=7)
+  bairro = models.CharField(max_length=55)
+  cidade = models.CharField(max_length=55)
+
+  def __str__(self):
+    return f"{self.rua} {self.numero} {self.bairro} {self.cidade}"
+
 class Cliente(models.Model):
   nome = models.CharField(max_length=255)
   cpf = models.CharField(max_length=14, unique=True)
   telefone = models.CharField(max_length=20, blank=True)
-  endereco = models.CharField(max_length=255, blank=True)
   data_nascimento = models.CharField(null=True, blank=True)
+
+  endereco = models.OneToOneField(
+    Endereco,
+    on_delete=models.SET_NULL, # não apaga o cliente se o endereço for apagado
+    null=True,
+    blank=True
+  )
 
   def __str__(self):
     return self.nome
