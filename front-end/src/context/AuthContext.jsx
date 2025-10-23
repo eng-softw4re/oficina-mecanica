@@ -19,10 +19,17 @@ export function AuthProvider({ children }){ // cria o provider
     api.defaults.headers.common['Authorization'] = `Token ${token}`
   }
 
+  const logout = () => {
+    localStorage.removeItem('authToken')
+    setToken(null)
+    delete api.defaults.headers.common['Authorization']
+  }
+
   const value = {
     token,
     isAuthenticated: !!token, // transforma o token em um boolean.
     login,
+    logout,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
