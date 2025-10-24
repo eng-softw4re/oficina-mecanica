@@ -1,7 +1,8 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 import api from '../services/api';
 
-const AuthContext = createContext(null); // cria o contexto
+// eslint-disable-next-line react-refresh/only-export-components
+export const AuthContext = createContext(null); // cria o contexto
 
 export function AuthProvider({ children }){ // cria o provider
   const [token, setToken] = useState(localStorage.getItem("authToken"));
@@ -33,8 +34,4 @@ export function AuthProvider({ children }){ // cria o provider
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-}
-
-export function useAuth() {
-  return useContext(AuthContext)
 }
