@@ -4,13 +4,13 @@ const authService = {
   login: async (username, password) => {
     try {
       const response = await api.post('login/', {
-        username,
-        password
+        username: username,
+        password: password
       });
 
       return response;
     }catch(error) {
-      throw error.response.data || new Error('Erro de autenticação')
+      throw error.response || new Error('Erro de autenticação')
     }
   }
 
