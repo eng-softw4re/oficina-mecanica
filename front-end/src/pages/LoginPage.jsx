@@ -17,7 +17,7 @@ function LoginPage() {
     
     try {
       const info = await authService.login(username, password);
-      console.log("data: ",info.data.token)
+     
       if (info.data.token) {
         login(info.data.token);
         navigate('/home');
