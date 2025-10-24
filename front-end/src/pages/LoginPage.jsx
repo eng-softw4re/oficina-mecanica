@@ -8,7 +8,7 @@ function LoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   
-  const { login } = useAuth(); 
+  const { login, logout } = useAuth(); 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -16,13 +16,17 @@ function LoginPage() {
     setError(null);
     
     try {
-      const data = await authService.login(username, password);
-      
-      login(data.token);
-      navigate('/'); 
+      const info = await authService.login(username, password);
+      console.log("data: ",info.data.token)
+      if (info.data.token) {
+        login(info.data.token);
+        navigate('/home');
+      } 
+       
     } catch (err) {
       setError('Credenciais inválidas. Tente novamente.');
       console.error(err);
+      logout();
     }
   };
 
