@@ -120,3 +120,14 @@ class Cobranca(models.Model):
       os_id = "Desconhecida"
 
     return f"Cobrança #{self.id} | OS #{os_id} | {valor_str}"
+  
+class Pagamento(models.Model):
+  cobranca = models.ForeignKey('Cobranca', on_delete=models.CASCADE)
+  valor_pago = models.DecimalField(max_digits=10, decimal_places=2)
+  data_transicao = models.DateField(auto_now_add=True)
+  metodo_pagamento = models.CharField(max_length=100)
+
+  def __str__(self):
+    # Formata a data para o padrão brasileiro (dd/mm/yyyy)
+    data_formatada = self.data_transicao.strftime('%d/%m/%Y')
+    return f"Pagamento de R$ {self.valor_pago} para a {self.cobranca} em {data_formatada}"
