@@ -4,14 +4,14 @@ from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, Insumo
 class EnderecoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Endereco
-    fields = ["id", "rua", "bairro", "cidade", "numero"]
+    fields = ["id", "rua", "numero", "bairro", "cidade"]
 
 class ClienteSerializer(serializers.ModelSerializer):
   endereco = EnderecoSerializer()
 
   class Meta:
     model = Cliente
-    fields = ["id", "nome", "cpf", "telefone", "endereco", "data_nascimento"]
+    fields = ["id", "nome", "cpf", "telefone", "data_nascimento", "endereco"]
 
   def create(self, validated_data):
     endereco_data = validated_data.pop('endereco')
