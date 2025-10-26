@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico, Cobranca, Endereco
+from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico, Cobranca, Endereco, Pagamento
 
 class EnderecoSerializer(serializers.ModelSerializer):
   class Meta:
@@ -65,3 +65,8 @@ class CobrancaSerializer(serializers.ModelSerializer):
   class Meta:
     model = Cobranca
     fields = ["id", "ordem_servico", "valor_total", "data_emissao"]
+
+class PagamentoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Pagamento
+    fields = ["id", "cobranca", "valor_pago", "data_transicao", "metodo_pagamento"]
