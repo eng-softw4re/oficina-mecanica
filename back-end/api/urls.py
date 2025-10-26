@@ -16,7 +16,7 @@ router.register(r'insumos', InsumoViewSet, basename='insumo')
 router.register(r'insumos-ordem-de-servicos', InsumoOrdemServicoViewSet, basename='insumos-ordem-de-servico')
 router.register(r'cobranca', CobrancaViewSet, basename='cobranca')
 router.register(r'enderecos', EnderecoViewSet, basename='endereco')
-router.register(r'pagamentos', EnderecoViewSet, basename='pagamento')
+router.register(r'pagamentos', PagamentoViewSet, basename='pagamento')
 
 urlpatterns = [
     path('', include(router.urls)),
