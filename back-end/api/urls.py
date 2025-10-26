@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from .views import (
     ClienteViewSet, VeiculoViewSet, ProcedimentoViewSet, OrdemServicoViewSet, InsumoViewSet, InsumoOrdemServicoViewSet, CobrancaViewSet,
-    EnderecoViewSet, 
+    EnderecoViewSet, PagamentoViewSet,
 )
 
 router = DefaultRouter()
@@ -16,6 +16,7 @@ router.register(r'insumos', InsumoViewSet, basename='insumo')
 router.register(r'insumos-ordem-de-servicos', InsumoOrdemServicoViewSet, basename='insumos-ordem-de-servico')
 router.register(r'cobranca', CobrancaViewSet, basename='cobranca')
 router.register(r'enderecos', EnderecoViewSet, basename='endereco')
+router.register(r'pagamentos', EnderecoViewSet, basename='pagamento')
 
 urlpatterns = [
     path('', include(router.urls)),
