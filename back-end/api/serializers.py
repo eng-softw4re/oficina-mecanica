@@ -22,11 +22,11 @@ class ClienteSerializer(serializers.ModelSerializer):
 
   def update(self, instance, validated_data):
     endereco_data = validated_data.pop('endereco', None)
-    instace = super().update(instance, validated_data)
+    instance = super().update(instance, validated_data)
 
     if endereco_data:
-      if instace.endereco:
-        endereco_serializer = EnderecoSerializer(instace.endereco, data=endereco_data, partial=True)
+      if instance.endereco:
+        endereco_serializer = EnderecoSerializer(instance.endereco, data=endereco_data, partial=True)
         if endereco_serializer.is_valid():
           endereco_serializer.save()
       else:
