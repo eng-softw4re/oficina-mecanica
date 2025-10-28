@@ -111,6 +111,31 @@ class Cobranca(models.Model):
       self.valor_total = self.ordem_servico.calcular_valor_total()
     super().save(*args, **kwargs)
 
+  @property
+  def total_pago(self):
+    agregado = self.pagamentos.aggregate(soma_total=Sum('valor_pago'))
+    total_pago = agregado['soma_total']
+
+    # Se não houver pagamentos (total_pago for None), retornamos 0
+    if total_pago is None:
+      return Decimal(0) 
+    return total_pago
+  
+  @property
+  def valor_restante(self):
+    return self.valor_total - self.total_pago
+
+  @property
+  def status(self):
+    restante = self.valor_restante
+    
+    if restante <= 0:
+      return "Quitado"
+    elif self.total_pago > 0:
+      return "Pago Parcialmente"
+    else:
+      return "Pendente"
+
   def __str__(self):
     valor_str = f"R$ {self.valor_total}" if self.valor_total is not None else "Valor Pendente"
     
@@ -120,3 +145,14 @@ class Cobranca(models.Model):
       os_id = "Desconhecida"
 
     return f"Cobrança #{self.id} | OS #{os_id} | {valor_str}"
+  
+class Pagamento(models.Model):
+  cobranca = models.ForeignKey('Cobranca', on_delete=models.CASCADE, related_name="pagamentos")
+  valor_pago = models.DecimalField(max_digits=10, decimal_places=2)
+  data_transicao = models.DateField(auto_now_add=True)
+  metodo_pagamento = models.CharField(max_length=100)
+
+  def __str__(self):
+    # Formata a data para o padrão brasileiro (dd/mm/yyyy)
+    data_formatada = self.data_transicao.strftime('%d/%m/%Y')
+    return f"Pagamento de R$ {self.valor_pago} para a {self.cobranca} em {data_formatada}"
