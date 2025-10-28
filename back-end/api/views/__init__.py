@@ -6,3 +6,4 @@ from .insumo_view import InsumoViewSet
 from .insumo_ordem_servico_view import InsumoOrdemServicoViewSet
 from .cobranca_view import CobrancaViewSet
 from .endereco_view import EnderecoViewSet
+from .pagamento_view import PagamentoViewSet

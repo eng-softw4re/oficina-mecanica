@@ -1,17 +1,17 @@
 from rest_framework import serializers
-from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico, Cobranca, Endereco
+from .models import Cliente, Veiculo, Procedimento, OrdemServico, Insumo, InsumoOrdemServico, Cobranca, Endereco, Pagamento
 
 class EnderecoSerializer(serializers.ModelSerializer):
   class Meta:
     model = Endereco
-    fields = ["id", "rua", "bairro", "cidade", "numero"]
+    fields = ["id", "rua", "numero", "bairro", "cidade"]
 
 class ClienteSerializer(serializers.ModelSerializer):
   endereco = EnderecoSerializer()
 
   class Meta:
     model = Cliente
-    fields = ["id", "nome", "cpf", "telefone", "endereco", "data_nascimento"]
+    fields = ["id", "nome", "cpf", "telefone", "data_nascimento", "endereco"]
 
   def create(self, validated_data):
     endereco_data = validated_data.pop('endereco')
@@ -22,11 +22,11 @@ class ClienteSerializer(serializers.ModelSerializer):
 
   def update(self, instance, validated_data):
     endereco_data = validated_data.pop('endereco', None)
-    instace = super().update(instance, validated_data)
+    instance = super().update(instance, validated_data)
 
     if endereco_data:
-      if instace.endereco:
-        endereco_serializer = EnderecoSerializer(instace.endereco, data=endereco_data, partial=True)
+      if instance.endereco:
+        endereco_serializer = EnderecoSerializer(instance.endereco, data=endereco_data, partial=True)
         if endereco_serializer.is_valid():
           endereco_serializer.save()
       else:
@@ -65,3 +65,8 @@ class CobrancaSerializer(serializers.ModelSerializer):
   class Meta:
     model = Cobranca
     fields = ["id", "ordem_servico", "valor_total", "data_emissao"]
+
+class PagamentoSerializer(serializers.ModelSerializer):
+  class Meta:
+    model = Pagamento
+    fields = ["id", "cobranca", "valor_pago", "data_transicao", "metodo_pagamento"]
