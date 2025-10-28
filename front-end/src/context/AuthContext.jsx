@@ -17,7 +17,7 @@ export function AuthProvider({ children }){ // cria o provider
     localStorage.setItem('authToken', newToken)
 
     setToken(newToken)
-    api.defaults.headers.common['Authorization'] = `Token ${token}`
+    api.defaults.headers.common['Authorization'] = `Token ${newToken}`
   }
 
   const logout = () => {
