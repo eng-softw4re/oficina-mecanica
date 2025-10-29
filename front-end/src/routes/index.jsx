@@ -3,6 +3,7 @@ import LoginPage from '../pages/LoginPage';
 import ProtectedRoutes from './ProtectedRoutes';
 import HomePage from '../pages/HomePage';
 import ClientesPage from '../pages/ClientesPage';
+import ClientePage from '../pages/ClientePage';
 
 
 const router = createBrowserRouter([
@@ -14,14 +15,9 @@ const router = createBrowserRouter([
     path:  '/',
     element: <ProtectedRoutes />,
     children: [ // rotas acessíveis para usuários logados.
-      {
-        path: '/home',
-        element: <HomePage />
-      },
-      {
-        path: '/clientes',
-        element: <ClientesPage />
-      }
+      { path: '/home', element: <HomePage /> },
+      { path: '/clientes', element: <ClientesPage /> },
+      { path: '/clientes/:id', element: <ClientePage />}
     ]
   }
 ])
