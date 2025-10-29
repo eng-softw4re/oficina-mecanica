@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import clienteService from '../services/clienteServices';
 import { Link } from 'react-router-dom';
 
@@ -11,10 +10,11 @@ function ClientesPage() {
   useEffect(() => {
     async function fetchClientes() {
       try {
+        const token = localStorage.getItem("authToken")
+        const response = await clienteService.getAll(token);
+        
         setLoading(true)
-        const data = await clienteService.getAll();
-
-        setClientes(data);
+        setClientes(response);
         setError(null)
       }catch(err){
         setError(err.message || 'Erro ao buscar clientes.')
@@ -62,14 +62,14 @@ function ClientesPage() {
           <tbody className="bg-white divide-y divide-gray-200">
             {clientes.map((cliente) => (
               // Lembre-se da 'key' única para cada item da lista
-              <tr key={cliente.id_pessoa}> 
-                <td className="px-6 py-4 whitespace-nowrap">{cliente.nome}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{cliente.cpf}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{cliente.telefone}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-right">
+              <tr key={cliente.id}> 
+                <td className="px-6 py-4 font-medium text-gray-900">{cliente.nome}</td>
+                <td className="px-6 py-4 text-gray-700">{cliente.cpf}</td>
+                <td className="px-6 py-4 text-gray-700">{cliente.telefone}</td>
+                <td className="px-6 py-4 text-right">
                   {/* O Link do React Router para a página de detalhes */}
                   <Link 
-                    to={`/clientes/${cliente.id_pessoa}`}
+                    to={`/clientes/${cliente.id}`}
                     className="text-blue-600 hover:text-blue-900"
                   >
                     Ver Detalhes
