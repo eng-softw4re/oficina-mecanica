@@ -30,16 +30,16 @@ function ClienteDetailPage() {
 
   if (loading) {
     return (
-      <div className="p-4 text-center">
-        <p className="text-gray-500">Carregando clientes...</p>
+      <div>
+        <p>Carregando clientes...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="p-4 text-center">
-        <p className="text-red-500">Erro: {error}</p>
+      <div>
+        <p>Erro: {error}</p>
       </div>
     );
   }
@@ -49,16 +49,15 @@ return (
     <div className={styles.container}>
      
 
-      <div className="bg-white rounded-2xl shadow-xl border-l-8 border-[#B35A27] p-8">
+      <div>
         <div className={styles.voltar}>
           <Link
             to="/clientes"
-            // className={}
           >
             &larr;
           </Link>
         </div>
-        <h1 className="text-3xl font-bold text-[#133B4F] mb-6 border-b-2 border-[#D8C6AF] pb-2">
+        <h1>
           {cliente.data.nome}
         </h1>
 
@@ -92,7 +91,7 @@ return (
            </div>
           </div>
         ) : (
-          <p className="text-[#9BAEC8] italic">Endereço não cadastrado.</p>
+          <p>Endereço não cadastrado.</p>
         )}
         <div className={styles.botoes}>
           <button className={styles.botao}>Editar</button>
