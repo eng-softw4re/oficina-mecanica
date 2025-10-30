@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import clienteService from '../services/clienteServices';
+import styles from './ClientePage.module.css';
 
 function ClienteDetailPage() {
   const { id } = useParams(); 
@@ -43,49 +44,66 @@ function ClienteDetailPage() {
     );
   }
 
-  return (
-    <div className="container mx-auto p-6 max-w-2xl">
-      <Link 
-        to="/clientes" 
-        className="mb-6 inline-block text-blue-600 hover:text-blue-800 transition duration-150 ease-in-out"
-      >
-        &larr; Voltar para a lista de clientes
-      </Link>
+return (
+  <div className={styles.background}>
+    <div className={styles.container}>
+     
 
-      <div className="bg-white shadow-lg rounded-lg p-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">{cliente.data.nome}</h1>
-        
-        <div className="space-y-3 mb-6">
-          <p>
-            <span className="font-semibold text-gray-600">CPF:</span> 
-            <span className="ml-2 text-gray-800">{cliente.data.cpf}</span>
-          </p>
-          <p>
-            <span className="font-semibold text-gray-600">Telefone:</span> 
-            <span className="ml-2 text-gray-800">{cliente.data.telefone || 'Não informado'}</span>
-          </p>
-          <p>
-            <span className="font-semibold text-gray-600">Data de Nascimento:</span> 
-            <span className="ml-2 text-gray-800">{cliente.data.data_nascimento || 'Não informada'}</span>
-          </p>
+      <div className="bg-white rounded-2xl shadow-xl border-l-8 border-[#B35A27] p-8">
+        <div className={styles.voltar}>
+          <Link
+            to="/clientes"
+            // className={}
+          >
+            &larr;
+          </Link>
+        </div>
+        <h1 className="text-3xl font-bold text-[#133B4F] mb-6 border-b-2 border-[#D8C6AF] pb-2">
+          {cliente.data.nome}
+        </h1>
+
+        <div className={styles.informacoes_cliente}>
+          <div className={styles.filho_info_cliente}>
+            <span className="">CPF:</span>
+            <span>{cliente.data.cpf}</span>
+          </div>
+
+          <div className={styles.filho_info_cliente}>
+            <span className="">Telefone:</span>
+            <span>{cliente.data.telefone || 'Não informado'}</span>
+          </div>
+
+          <div className={styles.filho_info_cliente}>
+            <span className="">Data de Nascimento:</span>
+            <span>{cliente.data.data_nascimento || 'Não informada'}</span>
+          </div>
         </div>
 
         {cliente.data.endereco ? (
-          <div className="border-t border-gray-200 pt-4">
-            <h2 className="text-xl font-semibold text-gray-700 mb-2">Endereço</h2>
-            <p className="text-gray-800">
-              {cliente.data.endereco.rua}, {cliente.data.endereco.numero}
-            </p>
-            <p className="text-gray-600">
-              {cliente.data.endereco.bairro}, {cliente.data.endereco.cidade}
-            </p>
+          <div className={styles.endereco_container}>
+            <h2 className={styles.endereco}>
+              Endereço
+            </h2>
+           <div className={styles.endereco_informacoes}>
+              <div>Rua: <span>{cliente.data.endereco.rua}</span></div>
+              <div>Número: <span>{cliente.data.endereco.numero}</span></div>
+              <div>Bairro: <span>{cliente.data.endereco.bairro}</span></div>
+              <div>Cidade: <span>{cliente.data.endereco.cidade}</span></div>
+           </div>
           </div>
         ) : (
-          <p className="text-gray-500 italic">Endereço não cadastrado.</p>
+          <p className="text-[#9BAEC8] italic">Endereço não cadastrado.</p>
         )}
+        <div className={styles.botoes}>
+          <button className={styles.botao}>Editar</button>
+          <button className={styles.botao}>Excluir</button>
+          <button className={styles.botao}>Veículos</button>
+        </div>
       </div>
     </div>
-  );
+  </div>
+);
+
 }
 
 export default ClienteDetailPage;
