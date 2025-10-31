@@ -10,7 +10,7 @@ const procedimentoService = {
     return response.data
   },
   getProcedimento: async (token, id) => {
-    const response = await api.get(`procedimento/${id}`, {
+    const response = await api.get(`procedimentos/${id}`, {
       headers: {
         Authorization: `Token ${token}`
       }
@@ -20,4 +20,4 @@ const procedimentoService = {
   }
 }
 
-export procedimentoService;
+export default procedimentoService;

@@ -56,6 +56,11 @@ function Sidebar() {
               Clientes
             </Link>
           </li>
+          <li style={navItemStyles}>
+            <Link to="/procedimentos" style={navLinkStyles}>
+              Procedimentos
+            </Link>
+          </li>
         </ul>
       </nav>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import clienteService from '../services/clienteServices';
 // Esta importação está correta
-import styles from './ClientePage.module.css'; 
+import styles from './DetalhesPage.module.css'; 
 
 function ClienteDetailPage() {
   const { id } = useParams(); 
