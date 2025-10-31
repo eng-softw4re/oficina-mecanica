@@ -60,7 +60,6 @@ class Insumo(models.Model):
     return self.nome
 
 class OrdemServico(models.Model):
-  cliente = models.ForeignKey("Cliente", on_delete=models.CASCADE, related_name='ordens_cliente')
   veiculo = models.ForeignKey("Veiculo", on_delete=models.CASCADE, related_name='ordens_servico')
   data = models.DateTimeField(auto_now_add=True)
   insumos = models.ManyToManyField('Insumo', through='InsumoOrdemServico', related_name='ordens_de_servico')
