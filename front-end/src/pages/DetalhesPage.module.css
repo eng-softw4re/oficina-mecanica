@@ -1,0 +1,111 @@
+/* src/pages/ClientePage.module.css - Paleta Ajustada */
+
+.container {
+  max-width: 800px; 
+  margin: 0 auto;   
+  padding: 20px;
+  /* Fundo branco para um visual mais limpo que o cinza claro */
+  background-color: #ffffff; 
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* === Azul Marinho para links e títulos === */
+
+.backButton {
+  display: inline-flex; 
+  align-items: center;
+  margin-bottom: 20px; 
+  /* Cor principal (Azul Marinho) */
+  color: #0B2A4C; 
+  text-decoration: none; 
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.backIcon {
+  margin-right: 8px; 
+  font-size: 20px; 
+}
+
+.header {
+  text-align: center; 
+  margin-bottom: 30px;
+  /* Cor principal (Azul Marinho) */
+  color: #0B2A4C; 
+}
+
+.section {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee; 
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* Um tom de azul mais leve para subtítulos */
+  color: #2C3E50; 
+}
+
+/* === Tons neutros para texto de informação === */
+
+.infoItem {
+  margin-bottom: 8px;
+}
+
+.infoLabel {
+  font-weight: bold;
+  margin-right: 5px;
+  /* Cinza escuro para boa legibilidade */
+  color: #333333; 
+}
+
+/* === Botões com as cores pedidas === */
+
+.buttonsContainer {
+  display: flex; 
+  justify-content: center; 
+  gap: 15px; 
+  margin-top: 30px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+/* 1. Botão Editar (Azul Marinho) */
+.button.edit {
+  background-color: #0B2A4C; /* Azul Marinho */
+}
+
+.button.edit:hover {
+  background-color: #2C3E50; /* Tom mais claro de azul */
+}
+
+/* 2. Botão Excluir (Vermelho) */
+.button.exclude {
+  background-color: #e53935; /* Vermelho (mantido) */
+}
+
+.button.exclude:hover {
+  background-color: #d32f2f;
+}
+
+/* 3. Botão Veículos (Verde) */
+.button.vehicles {
+  /* Um verde mais "sóbrio" */
+  background-color: #28a745; 
+}
+
+.button.vehicles:hover {
+  background-color: #218838;
+}

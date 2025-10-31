@@ -1,10 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
+import App from '../App.jsx';
 import LoginPage from '../pages/LoginPage';
-import ProtectedRoutes from './ProtectedRoutes';
 import HomePage from '../pages/HomePage';
 import ClientesPage from '../pages/ClientesPage';
 import ClientePage from '../pages/ClientePage';
-
+import ProcedimentosPage from '../pages/ProcedimentosPage.jsx';
+import ProcedimentoPage from '../pages/ProcedimentoPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -13,13 +14,30 @@ const router = createBrowserRouter([
   },
   {
     path:  '/',
-    element: <ProtectedRoutes />,
-    children: [ // rotas acessíveis para usuários logados.
-      { path: '/home', element: <HomePage /> },
-      { path: '/clientes', element: <ClientesPage /> },
-      { path: '/clientes/:id', element: <ClientePage />}
+    element: <App />,
+    children: [ 
+      { 
+        index: true, 
+        element: <HomePage /> 
+      }, 
+      { 
+        path: 'clientes',
+        element: <ClientesPage /> 
+      },
+      { 
+        path: 'clientes/:id', 
+        element: <ClientePage />
+      },
+      { 
+        path: 'procedimentos',
+        element: <ProcedimentosPage /> 
+      },
+      { 
+        path: 'procedimentos/:id',
+        element: <ProcedimentoPage /> 
+      }
     ]
   }
-])
+]);
 
 export default router;
