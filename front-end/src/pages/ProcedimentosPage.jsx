@@ -70,7 +70,7 @@ function ProcedimentosPage() {
                 <td className="px-6 py-4 text-right">
                   {/* O Link do React Router para a página de detalhes */}
                   <Link 
-                    to={`/clientes/${procedimento.id}`}
+                    to={`/procedimentos/${procedimento.id}`}
                     className="text-blue-600 hover:text-blue-900"
                   >
                     Ver Detalhes
