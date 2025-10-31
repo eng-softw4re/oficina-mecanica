@@ -1,109 +1,123 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import clienteService from '../services/clienteServices';
-import styles from './ClientePage.module.css';
+// Esta importação está correta
+import styles from './ClientePage.module.css'; 
 
 function ClienteDetailPage() {
   const { id } = useParams(); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [cliente, setCliente] = useState({});
+  // Note: Seu serviço parece retornar { data: {...} }
+  const [cliente, setCliente] = useState(null); 
 
   useEffect(() => {
-    async function fetchClientes() {
+    async function fetchCliente() { // Renomeado para singular
       try {
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem("authToken");
+        // Não defina 'loading' como true aqui dentro, só no início
         const response = await clienteService.getCliente(token, id);
-        console.log(response)
-        setLoading(true)
-        setCliente(response);
-        setError(null)
-      }catch(err){
-        setError(err.message || 'Erro ao buscar cliente.')
-        console.error(err)
-      }finally {
-        setLoading(false)
+        console.log(response);
+        setCliente(response.data); // Assumindo que os dados estão em response.data
+        setError(null);
+      } catch(err) {
+        setError(err.message || 'Erro ao buscar cliente.');
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     }
-    fetchClientes();
-  }, [id])
+    fetchCliente();
+  }, [id]);
 
   if (loading) {
+    // Vamos usar o 'container' para centralizar o loading
     return (
-      <div className="p-4 text-center">
-        <p className="text-gray-500">Carregando clientes...</p>
+      <div className={styles.container}>
+        <p style={{ textAlign: 'center' }}>Carregando cliente...</p>
       </div>
     );
   }
 
   if (error) {
+    // E o 'container' para centralizar o erro
     return (
-      <div className="p-4 text-center">
-        <p className="text-red-500">Erro: {error}</p>
+      <div className={styles.container}>
+        <p style={{ textAlign: 'center', color: 'red' }}>Erro: {error}</p>
       </div>
     );
   }
 
-return (
-  <div className={styles.background}>
+  // Se o cliente não for encontrado após o loading
+  if (!cliente) {
+    return (
+      <div className={styles.container}>
+        <p style={{ textAlign: 'center' }}>Cliente não encontrado.</p>
+      </div>
+    );
+  }
+
+  // === ESTE É O JSX CORRIGIDO ===
+  // (Ele usa as classes do CSS que fizemos antes)
+  return (
+    // Removi o 'styles.background', pois o 'home-content' do App.jsx
+    // já faz o espaçamento e o 'styles.container' é a caixa branca.
     <div className={styles.container}>
-     
+      
+      {/* Botão de voltar */}
+      <Link to="/clientes" className={styles.backButton}>
+        <span className={styles.backIcon}>&larr;</span> Voltar para Clientes
+      </Link>
 
-      <div className="bg-white rounded-2xl shadow-xl border-l-8 border-[#B35A27] p-8">
-        <div className={styles.voltar}>
-          <Link
-            to="/clientes"
-            // className={}
-          >
-            &larr;
-          </Link>
-        </div>
-        <h1 className="text-3xl font-bold text-[#133B4F] mb-6 border-b-2 border-[#D8C6AF] pb-2">
-          {cliente.data.nome}
-        </h1>
+      <h1 className={styles.header}>
+        {cliente.nome}
+      </h1>
 
-        <div className={styles.informacoes_cliente}>
-          <div className={styles.filho_info_cliente}>
-            <span className="">CPF:</span>
-            <span>{cliente.data.cpf}</span>
-          </div>
-
-          <div className={styles.filho_info_cliente}>
-            <span className="">Telefone:</span>
-            <span>{cliente.data.telefone || 'Não informado'}</span>
-          </div>
-
-          <div className={styles.filho_info_cliente}>
-            <span className="">Data de Nascimento:</span>
-            <span>{cliente.data.data_nascimento || 'Não informada'}</span>
-          </div>
+      {/* Seção de Informações Pessoais */}
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Informações Pessoais</h2>
+        <div className={styles.infoItem}>
+          <span className={styles.infoLabel}>CPF:</span>
+          {cliente.cpf}
         </div>
 
-        {cliente.data.endereco ? (
-          <div className={styles.endereco_container}>
-            <h2 className={styles.endereco}>
-              Endereço
-            </h2>
-           <div className={styles.endereco_informacoes}>
-              <div>Rua: <span>{cliente.data.endereco.rua}</span></div>
-              <div>Número: <span>{cliente.data.endereco.numero}</span></div>
-              <div>Bairro: <span>{cliente.data.endereco.bairro}</span></div>
-              <div>Cidade: <span>{cliente.data.endereco.cidade}</span></div>
-           </div>
-          </div>
-        ) : (
-          <p className="text-[#9BAEC8] italic">Endereço não cadastrado.</p>
-        )}
-        <div className={styles.botoes}>
-          <button className={styles.botao}>Editar</button>
-          <button className={styles.botao}>Excluir</button>
-          <button className={styles.botao}>Veículos</button>
+        <div className={styles.infoItem}>
+          <span className={styles.infoLabel}>Telefone:</span>
+          {cliente.telefone || 'Não informado'}
+        </div>
+
+        <div className={styles.infoItem}>
+          <span className={styles.infoLabel}>Data de Nascimento:</span>
+          {cliente.data_nascimento || 'Não informada'}
         </div>
       </div>
-    </div>
-  </div>
-);
 
+      {/* Seção de Endereço */}
+      {cliente.endereco ? (
+        <div className={styles.section}>
+          <h2 className={styles.sectionTitle}>Endereço</h2>
+          <div className={styles.infoItem}>
+            <span className={styles.infoLabel}>Rua:</span> {cliente.endereco.rua}, {cliente.endereco.numero}
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.infoLabel}>Bairro:</span> {cliente.endereco.bairro}
+          </div>
+          <div className={styles.infoItem}>
+            <span className={styles.infoLabel}>Cidade:</span> {cliente.endereco.cidade}
+          </div>
+        </div>
+      ) : (
+        <p style={{ fontStyle: 'italic', color: '#888' }}>Endereço não cadastrado.</p>
+      )}
+
+      {/* Botões de Ação */}
+      <div className={styles.buttonsContainer}>
+        <button className={`${styles.button} ${styles.edit}`}>Editar</button>
+        <button className={`${styles.button} ${styles.exclude}`}>Excluir</button>
+        <button className={`${styles.button} ${styles.vehicles}`}>Veículos</button>
+      </div>
+    </div>
+  );
 }
 
 export default ClienteDetailPage;

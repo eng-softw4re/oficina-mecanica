@@ -6,10 +6,6 @@ import styles from './HomePage.module.css';
 function HomePage() {
   return (
     <div className={styles['home-layout']}> 
-      
-      <Sidebar />
-
-      {/* Faça o mesmo para todas as classes */}
       <div className={styles['home-content']}>
         <h1 className={styles['home-title']}>Bem-vindo ao Dashboard</h1>
         

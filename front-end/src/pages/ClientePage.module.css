@@ -1,83 +1,111 @@
-/*
- * Paleta de Cores:
- * Fundo Bege Claro: #D8C6AF (Usado no index.css)
- * Cartão: #FFFFFF (Decidimos usar branco, como no seu exemplo)
- * Laranja Terroso (Destaques): #B35A27
- * Azul Petróleo (Textos): #133B4F
-*/
-
-.background {
-  background-color: #D8C6AF;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* src/pages/ClientePage.module.css - Paleta Ajustada */
 
 .container {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  position: relative;
+  max-width: 800px; 
+  margin: 0 auto;   
+  padding: 20px;
+  /* Fundo branco para um visual mais limpo que o cinza claro */
+  background-color: #ffffff; 
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.voltar {
-  border-radius: 50%;
-  font-size: 2rem;
-  width: 3rem;
-  height: 3rem;
-  position: absolute;
-  top: 1rem;   
-  left: 1rem;  
-  cursor: pointer;
-}
+/* === Azul Marinho para links e títulos === */
 
-.informacoes_cliente {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-  padding: 1rem 0;
-}
-
-.filho_info_cliente {
-  display: flex;
-  gap: 1rem;
-}
-
-.endereco_container {
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-start; */
-  padding: 1rem 0;
-  border-top: 1px solid #D8C6AF;  
-  border-bottom: 1px solid #D8C6AF; 
-}
-
-.endereco_informacoes {
-  display: flex;
-  flex-direction: column;
-}
-
-.endereco_informacoes div {
-  display: flex;
-  gap: 1rem;
-}
-
-.endereco {
-  color: #B35A27;
+.backButton {
+  display: inline-flex; 
+  align-items: center;
+  margin-bottom: 20px; 
+  /* Cor principal (Azul Marinho) */
+  color: #0B2A4C; 
+  text-decoration: none; 
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: 16px;
 }
 
-.botoes {
-  display: flex;
-  justify-content: space-evenly;
-  padding-top: 1rem;
+.backIcon {
+  margin-right: 8px; 
+  font-size: 20px; 
 }
 
-.botao {
-  background-color: #B35A27;
-  color: #ffffff;
-  padding: .5rem;
+.header {
+  text-align: center; 
+  margin-bottom: 30px;
+  /* Cor principal (Azul Marinho) */
+  color: #0B2A4C; 
+}
+
+.section {
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee; 
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  /* Um tom de azul mais leve para subtítulos */
+  color: #2C3E50; 
+}
+
+/* === Tons neutros para texto de informação === */
+
+.infoItem {
+  margin-bottom: 8px;
+}
+
+.infoLabel {
+  font-weight: bold;
+  margin-right: 5px;
+  /* Cinza escuro para boa legibilidade */
+  color: #333333; 
+}
+
+/* === Botões com as cores pedidas === */
+
+.buttonsContainer {
+  display: flex; 
+  justify-content: center; 
+  gap: 15px; 
+  margin-top: 30px;
+}
+
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+/* 1. Botão Editar (Azul Marinho) */
+.button.edit {
+  background-color: #0B2A4C; /* Azul Marinho */
+}
+
+.button.edit:hover {
+  background-color: #2C3E50; /* Tom mais claro de azul */
+}
+
+/* 2. Botão Excluir (Vermelho) */
+.button.exclude {
+  background-color: #e53935; /* Vermelho (mantido) */
+}
+
+.button.exclude:hover {
+  background-color: #d32f2f;
+}
+
+/* 3. Botão Veículos (Verde) */
+.button.vehicles {
+  /* Um verde mais "sóbrio" */
+  background-color: #28a745; 
+}
+
+.button.vehicles:hover {
+  background-color: #218838;
 }

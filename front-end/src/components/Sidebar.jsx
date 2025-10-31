@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 // --- Definindo os estilos como objetos JavaScript ---
 
@@ -40,29 +41,20 @@ const navLinkStyles = {
 
 function Sidebar() {
   return (
-    <div style={sidebarStyles}> {/* Aplicando o estilo principal */}
+    <div style={sidebarStyles}>
       <div style={logoStyles}>Oficina Mecânica</div>
       <nav>
         <ul style={navStyles}>
           <li style={navItemStyles}>
-            <a href="/" style={navLinkStyles}>
+            {/* MUDANÇA 2: Troque 'a' por 'Link' e 'href' por 'to' */}
+            <Link to="/" style={navLinkStyles}>
               Dashboard
-            </a>
+            </Link>
           </li>
           <li style={navItemStyles}>
-            <a href="/clientes" style={navLinkStyles}>
+            <Link to="/clientes" style={navLinkStyles}>
               Clientes
-            </a>
-          </li>
-          <li style={navItemStyles}>
-            <a href="/servicos" style={navLinkStyles}>
-              Serviços
-            </a>
-          </li>
-          <li style={navItemStyles}>
-            <a href="/relatorios" style={navLinkStyles}>
-              Relatórios
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
