@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import clienteService from '../services/clienteServices';
 // Esta importação está correta
-import styles from './DetalhesPage.module.css'; 
+import styles from './ClientePage.module.css'; 
 
 function ClienteDetailPage() {
   const { id } = useParams(); 
@@ -69,7 +69,7 @@ function ClienteDetailPage() {
           </Link>
         </div>
         <h1>
-          {cliente.data.nome}
+          {cliente.nome}
         </h1>
       </div>
 
@@ -81,16 +81,16 @@ function ClienteDetailPage() {
           {cliente.cpf}
         </div>
 
-        {cliente.data.endereco ? (
+        {cliente.endereco ? (
           <div className={styles.endereco_container}>
             <h2 className={styles.endereco}>
               Endereço
             </h2>
            <div className={styles.endereco_informacoes}>
-              <div>Rua: <span>{cliente.data.endereco.rua}</span></div>
-              <div>Número: <span>{cliente.data.endereco.numero}</span></div>
-              <div>Bairro: <span>{cliente.data.endereco.bairro}</span></div>
-              <div>Cidade: <span>{cliente.data.endereco.cidade}</span></div>
+              <div>Rua: <span>{cliente.endereco.rua}</span></div>
+              <div>Número: <span>{cliente.endereco.numero}</span></div>
+              <div>Bairro: <span>{cliente.endereco.bairro}</span></div>
+              <div>Cidade: <span>{cliente.endereco.cidade}</span></div>
            </div>
           </div>
         ) : (
