@@ -9,23 +9,24 @@ function OrdensPage() {
 
   useEffect(() => {
     async function fetchOrdens() {
+      setLoading(true);
+      setError(null);
+
       try {
-        const token = localStorage.getItem("authToken")
+        const token = localStorage.getItem("authToken");
         const response = await ordemService.getAll(token);
-        
-        setLoading(true)
         setOrdens(response);
-        setError(null)
-      }catch(err){
-        setError(err.message || 'Erro ao buscar Ordens de Serviços.')
-        console.error(err)
-      }finally {
-        setLoading(false)
+
+      } catch(err) {
+        setError(err.message || 'Erro ao buscar Ordens de Serviços.');
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchOrdens();
-  }, [])
+  }, []);
 
   if (loading) {
     return (
@@ -53,17 +54,15 @@ function OrdensPage() {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Veículo</th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Data</th>
               <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {ordem-de-servicos.map((ordem) => (
+            {ordens.map((ordem) => (
               // Lembre-se da 'key' única para cada item da lista
               <tr key={ordem.id}> 
-                <td className="px-6 py-4 font-medium text-gray-900">{ordem.cliente}</td>
                 <td className="px-6 py-4 text-gray-700">{ordem.veiculo}</td>
                 <td className="px-6 py-4 text-gray-700">{ordem.data}</td>
                 <td className="px-6 py-4 text-right">
