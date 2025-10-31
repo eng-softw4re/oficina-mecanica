@@ -13,6 +13,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  color: #fff;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -52,6 +56,48 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+tbody {
+  text-align: center;
+}
+
+thead {
+  background-color: #f9fafb;
+}
+
+thead th {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgb(45, 55, 72);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+tbody td {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-size: 0.875rem;
+  text-align: left;
+  word-wrap: break-word;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e5e7eb; 
+}
+
+tbody tr:hover {
+  background-color: #f9fafb; 
+  color: rgb(45, 55, 72);
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: light) {

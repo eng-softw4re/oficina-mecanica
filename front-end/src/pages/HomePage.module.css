@@ -3,6 +3,7 @@
 /* Estilo que estava no layoutStyles */
 .home-layout {
   display: flex;
+  width: 98vw;
 }
 
 /* Estilo que estava no contentStyles */
