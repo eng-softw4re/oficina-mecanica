@@ -31,34 +31,21 @@ function ClienteDetailPage() {
   }, [id]);
 
   if (loading) {
-    // Vamos usar o 'container' para centralizar o loading
     return (
-<<<<<<< HEAD
       <div>
         <p>Carregando clientes...</p>
-=======
-      <div className={styles.container}>
-        <p style={{ textAlign: 'center' }}>Carregando cliente...</p>
->>>>>>> 590c014db200199afdc487a0f6f0a035f0a25af8
       </div>
     );
   }
 
   if (error) {
-    // E o 'container' para centralizar o erro
     return (
-<<<<<<< HEAD
       <div>
         <p>Erro: {error}</p>
-=======
-      <div className={styles.container}>
-        <p style={{ textAlign: 'center', color: 'red' }}>Erro: {error}</p>
->>>>>>> 590c014db200199afdc487a0f6f0a035f0a25af8
       </div>
     );
   }
 
-  // Se o cliente não for encontrado após o loading
   if (!cliente) {
     return (
       <div className={styles.container}>
@@ -67,19 +54,12 @@ function ClienteDetailPage() {
     );
   }
 
-  // === ESTE É O JSX CORRIGIDO ===
-  // (Ele usa as classes do CSS que fizemos antes)
   return (
-    // Removi o 'styles.background', pois o 'home-content' do App.jsx
-    // já faz o espaçamento e o 'styles.container' é a caixa branca.
-    <div className={styles.container}>
-      
-      {/* Botão de voltar */}
+    <div className={styles.container}>      
       <Link to="/clientes" className={styles.backButton}>
         <span className={styles.backIcon}>&larr;</span> Voltar para Clientes
       </Link>
 
-<<<<<<< HEAD
       <div>
         <div className={styles.voltar}>
           <Link
@@ -91,11 +71,7 @@ function ClienteDetailPage() {
         <h1>
           {cliente.data.nome}
         </h1>
-=======
-      <h1 className={styles.header}>
-        {cliente.nome}
-      </h1>
->>>>>>> 590c014db200199afdc487a0f6f0a035f0a25af8
+      </div>
 
       {/* Seção de Informações Pessoais */}
       <div className={styles.section}>
@@ -105,7 +81,6 @@ function ClienteDetailPage() {
           {cliente.cpf}
         </div>
 
-<<<<<<< HEAD
         {cliente.data.endereco ? (
           <div className={styles.endereco_container}>
             <h2 className={styles.endereco}>
@@ -125,16 +100,6 @@ function ClienteDetailPage() {
           <button className={styles.botao}>Editar</button>
           <button className={styles.botao}>Excluir</button>
           <button className={styles.botao}>Veículos</button>
-=======
-        <div className={styles.infoItem}>
-          <span className={styles.infoLabel}>Telefone:</span>
-          {cliente.telefone || 'Não informado'}
-        </div>
-
-        <div className={styles.infoItem}>
-          <span className={styles.infoLabel}>Data de Nascimento:</span>
-          {cliente.data_nascimento || 'Não informada'}
->>>>>>> 590c014db200199afdc487a0f6f0a035f0a25af8
         </div>
       </div>
 
