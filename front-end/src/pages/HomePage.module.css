@@ -1,0 +1,24 @@
+/* src/pages/HomePage.css */
+
+/* Estilo que estava no layoutStyles */
+.home-layout {
+  display: flex;
+}
+
+/* Estilo que estava no contentStyles */
+.home-content {
+  flex: 1;
+  padding: 24px;
+}
+
+/* Estilo que estava no titleStyles */
+.home-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* Estilo que estava no <p> inline */
+.home-info-text {
+  margin-top: 16px;
+}
