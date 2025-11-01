@@ -11,7 +11,7 @@ function InsumosPage() {
     async function fetchInsumos() {
       try {
         const token = localStorage.getItem("authToken")
-        const response = await procedimentoService.getAll(token);
+        const response = await insumoService.getAll(token);
         
         setLoading(true)
         setInsumos(response);
