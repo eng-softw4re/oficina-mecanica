@@ -62,11 +62,6 @@ function Sidebar() {
             </Link>
           </li>
           <li style={navItemStyles}>
-            <Link to="/ordem-de-servicos" style={navLinkStyles}>
-              Ordens de Serviços
-            </Link>
-          </li>
-          <li style={navItemStyles}>
             <Link to="/insumos" style={navLinkStyles}>
               Insumos
             </Link>
