@@ -72,7 +72,13 @@ function InsumosPage() {
                     to={`/insumos/${insumo.id}`}
                     className="text-blue-600 hover:text-blue-900"
                   >
-                    Ver Detalhes
+                    Editar | 
+                  </Link>
+                  <Link 
+                    to={`/insumos/${insumo.id}`}
+                    className="text-blue-600 hover:text-blue-900"
+                  >
+                     Excluir
                   </Link>
                 </td>
               </tr>
