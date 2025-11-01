@@ -11,7 +11,7 @@ const veiculoService = {
   },
 
   getVeiculosPorCliente: async (token, cliente) => {
-    const response = await api.get(`clientes/${cliente}/veiculos/`, {
+    const response = await api.get(`veiculos/?cliente=${cliente}`, {
       headers: {
         Authorization: `Token ${token}`
       }
