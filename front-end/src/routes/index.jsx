@@ -7,7 +7,8 @@ import ClientePage from '../pages/ClientePage';
 import ProcedimentosPage from '../pages/ProcedimentosPage.jsx';
 import ProcedimentoPage from '../pages/ProcedimentoPage.jsx';
 import OrdensPage from '../pages/OrdensPage.jsx';
-import InsumosPage from '../pages/InsumosPage.jsx';
+import InsumosPage from '../pages/InsumosPage.jsx'
+import VeiculoPage from '../pages/VeiculoPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       { 
         path: 'insumos/:id',
         element: <InsumosPage /> 
+      },
+      { 
+        path: 'veiculos/:id',
+        element: <VeiculoPage /> 
       }
     ]
   }
