@@ -48,7 +48,12 @@ function ClientesPage() {
     <div className={styles.container}>
       <h1 className="text-3xl font-bold mb-4">Lista de Clientes</h1>
       
-      {/* TODO: Adicionar um botão de "Novo Cliente" aqui */}
+      <Link 
+        to="/clientes/cadastrar"
+        className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg transition duration-200"
+      >
+        Cadastrar Cliente
+      </Link>
 
       <div className={styles.sub_container}>
         <table>

@@ -8,6 +8,7 @@ import ProcedimentosPage from '../pages/ProcedimentosPage.jsx';
 import ProcedimentoPage from '../pages/ProcedimentoPage.jsx';
 import InsumosPage from '../pages/InsumosPage.jsx'
 import VeiculoPage from '../pages/VeiculoPage.jsx';
+import ClienteCreatePage from '../pages/CreateCliente.jsx';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
       { 
         path: 'veiculos/:id',
         element: <VeiculoPage /> 
+      },
+      { 
+        path: 'clientes/create',
+        element: <ClienteCreatePage /> 
       }
     ]
   }
