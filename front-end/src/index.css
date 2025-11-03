@@ -14,7 +14,7 @@
 }
 
 * {
-  color: #fff;
+  color: #fffbfb;
 }
 
 a {
@@ -63,7 +63,7 @@ tbody {
 }
 
 thead {
-  background-color: #f9fafb;
+  background-color: #6a99c9;
 }
 
 thead th {
@@ -88,15 +88,17 @@ tbody td {
   font-size: 0.875rem;
   text-align: left;
   word-wrap: break-word;
+  color: rgb(45, 55, 72);
 }
 
 tbody tr {
-  border-bottom: 1px solid #e5e7eb; 
+  border-bottom: 1px solid #000207; 
+  background-color: #f9fafb; 
 }
 
 tbody tr:hover td {
-  background-color: #f9fafb; 
-  color: rgb(45, 55, 72);
+  background-color: #c6dcf1; 
+  color: #000207;
   cursor: pointer;
 }
 

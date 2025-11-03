@@ -20,7 +20,7 @@ function LoginPage() {
      
       if (info.data.token) {
         login(info.data.token);
-        navigate('/home');
+        navigate('/');
       } 
        
     } catch (err) {

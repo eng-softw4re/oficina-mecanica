@@ -6,18 +6,26 @@ const ordemService = {
       headers: {
         Authorization: `Token ${token}`
       }
-    })
-    return response.data
+    });
+    return response.data;
   },
+
   getOrdem: async (token, id) => {
     const response = await api.get(`ordem-de-servicos/${id}`, {
       headers: {
         Authorization: `Token ${token}`
       }
-    })
-
-    return response;
+    });
+    return response.data;
+  },
+  getOrdensPorVeiculo: async (token, veiculoId) => {
+    const response = await api.get(`ordem-de-servicos/?veiculo=${veiculoId}`, {
+      headers: {
+        Authorization: `Token ${token}`
+      }
+    });
+    return response.data;
   }
-}
+};
 
 export default ordemService;

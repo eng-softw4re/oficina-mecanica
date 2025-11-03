@@ -52,9 +52,12 @@ class InsumoSerializer(serializers.ModelSerializer):
     fields = ["id", "nome", "valor", "descricao"]
 
 class OrdemServicoSerializer(serializers.ModelSerializer):
+  valor_total = serializers.SerializerMethodField()
   class Meta:
     model = OrdemServico
-    fields = ["id", "veiculo", "data", "insumos", "procedimentos"]
+    fields = ["id", "veiculo", "data", "insumos", "procedimentos", "valor_total"]
+  def get_valor_total(self, obj):
+    return obj.calcular_valor_total()
 
 class InsumoOrdemSerializer(serializers.ModelSerializer):
   class Meta:
